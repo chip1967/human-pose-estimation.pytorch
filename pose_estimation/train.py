@@ -64,7 +64,7 @@ def parse_args():
     parser.add_argument('--use-checkpoint',
                         help='indicates whether we should load from existing checkpoint',
                         action="store_true",
-                        default=false)
+                        default=False)
 
     args = parser.parse_args()
 
