@@ -32,6 +32,7 @@ from core.function import train
 from core.function import validate
 from utils.utils import get_optimizer
 from utils.utils import save_checkpoint
+from utils.utils import load_checkpoint
 from utils.utils import create_logger
 
 import dataset
