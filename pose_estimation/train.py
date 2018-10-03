@@ -127,7 +127,7 @@ def main():
     optimizer = get_optimizer(config, model)
 
     if args.use_checkpoint:
-        _,_,start_epoch = load_checkpoint(model, optimizer, start_epoch = config.TRAIN.BEGIN_EPOCH)
+        _,_,start_epoch = load_checkpoint(model, optimizer, final_output_dir, start_epoch = config.TRAIN.BEGIN_EPOCH)
     else:
         start_epoch = config.TRAIN.BEGIN_EPOCH
 

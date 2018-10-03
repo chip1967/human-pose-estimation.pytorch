@@ -82,7 +82,7 @@ def save_checkpoint(states, is_best, output_dir,
         torch.save(states['state_dict'],
                    os.path.join(output_dir, 'model_best.pth.tar'))
 
-def load_checkpoint(model, optimizer, (output_dir, filename='checkpoint.pth.tar', start_epoch = 0):
+def load_checkpoint(model, optimizer, output_dir, filename='checkpoint.pth.tar', start_epoch = 0):
     if os.path.isfile(os.path.join(output_dir, filename)):
         print("=> loading checkpoint '{}'".format(os.path.join(output_dir, filename)))
         checkpoint = torch.load(os.path.join(output_dir, filename))
