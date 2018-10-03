@@ -61,6 +61,10 @@ def parse_args():
     parser.add_argument('--workers',
                         help='num of dataloader workers',
                         type=int)
+    parser.add_argument('--use-checkpoint',
+                        help='indicates whether we should load from existing checkpoint',
+                        action="store_true",
+                        default=false)
 
     args = parser.parse_args()
 
@@ -121,6 +125,11 @@ def main():
 
     optimizer = get_optimizer(config, model)
 
+    if args.use_checkpoint:
+        _,_,start_epoch = load_checkpoint(model, optimizer, start_epoch = config.TRAIN.BEGIN_EPOCH)
+    else:
+        start_epoch = config.TRAIN.BEGIN_EPOCH
+
     lr_scheduler = torch.optim.lr_scheduler.MultiStepLR(
         optimizer, config.TRAIN.LR_STEP, config.TRAIN.LR_FACTOR
     )
@@ -164,9 +173,10 @@ def main():
         pin_memory=True
     )
 
+
     best_perf = 0.0
     best_model = False
-    for epoch in range(config.TRAIN.BEGIN_EPOCH, config.TRAIN.END_EPOCH):
+    for epoch in range(start_epoch, config.TRAIN.END_EPOCH):
         lr_scheduler.step()
 
         # train for one epoch
